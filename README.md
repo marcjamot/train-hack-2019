@@ -9,7 +9,6 @@ Repository for Train Hack 2019 (https://trainhack.com/)
 - **assets** contains raw files used for assets
 - **docs** contains any kind of project or hackaton documents
 - **game** contains the Unity game
-- **rpi** contains the server/controller
 
 ### Running the project
 
