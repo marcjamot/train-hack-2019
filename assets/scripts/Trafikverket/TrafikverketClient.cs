@@ -65,8 +65,10 @@ public class TrafikverketClient
         var result = await httpClient.PostAsync(baseUrl, stringContent);
         var stringResponse = await result.Content.ReadAsStringAsync();
 
-        var trainAnnouncements = JsonConvert.DeserializeObject<TrafikverketResponse<IEnumerable<TrainAnnouncement>>>(stringResponse)
-            .Response.Result;
+        Debug.Log(stringResponse);
+
+        var trainAnnouncements = JsonConvert.DeserializeObject<TrafikverketResponse<IEnumerable<TrainAnnouncementResponse>>>(stringResponse)
+            .Response.Result.First().TrainAnnouncement;
 
         trainAnnouncements = trainAnnouncements.OrderBy(t => t.AdvertisedTimeAtLocation);
 
@@ -74,7 +76,7 @@ public class TrafikverketClient
 
         var viaLocations = firstDeparture.ViaToLocation.OrderBy(v => v.Order);
 
-        var middleArrivals = trainAnnouncements.Where(t => t.ActivityType == "Ankomst" && viaLocations.Any(v => v.LocationName == t.LocationSignature));
+        var middleArrivals = viaLocations.Select(v => trainAnnouncements.First(t => t.ActivityType == "Ankomst" && t.LocationSignature == v.LocationName));
         
         var lastArrival = trainAnnouncements.First(t => t.LocationSignature == firstDeparture.ToLocation.First().LocationName);
 
@@ -84,7 +86,7 @@ public class TrafikverketClient
         {
             Index = 0,
             Name = firstDeparture.LocationSignature,
-            EstimatedDepartureTime = firstDeparture.EstimatedTimeAtLocation,
+            EstimatedDepartureTime = firstDeparture.AdvertisedTimeAtLocation,
             TypeOfTraffic = firstDeparture.TypeOfTraffic
         });
 
@@ -92,7 +94,7 @@ public class TrafikverketClient
         {
             Index = viaLocations.First(v => v.LocationName == m.LocationSignature).Order + 1,
             Name = m.LocationSignature,
-            EstimatedArrivalTime = m.EstimatedTimeAtLocation,
+            EstimatedArrivalTime = m.AdvertisedTimeAtLocation,
             TypeOfTraffic = m.TypeOfTraffic
         }));
 
@@ -100,7 +102,7 @@ public class TrafikverketClient
         {
             Index = tripInformations.Count,
             Name = lastArrival.LocationSignature,
-            EstimatedArrivalTime = lastArrival.EstimatedTimeAtLocation,
+            EstimatedArrivalTime = lastArrival.AdvertisedTimeAtLocation,
             TypeOfTraffic = lastArrival.TypeOfTraffic
         });
 
