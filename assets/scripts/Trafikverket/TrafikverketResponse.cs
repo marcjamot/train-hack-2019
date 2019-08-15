@@ -8,6 +8,10 @@ public class Response<T> {
     public T Result { get; set;}
 }
 
+public class TrainAnnouncementResponse {
+    public IEnumerable<TrainAnnouncement> TrainAnnouncement { get; set; }
+}
+
 public class TrainMessageResponse {
     public IEnumerable<TrainMessage> TrainMessage { get; set; }
 }

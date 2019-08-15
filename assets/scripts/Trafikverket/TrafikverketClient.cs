@@ -14,7 +14,7 @@ public class TrafikverketClient
 
     public async Task<IEnumerable<TrainMessage>> GetTrainMessages() 
     {
-        var request = new TrafikVerketRequest {
+        var request = new TrafikverketRequest {
             Login = new Login {
                 Authenticationkey = "afa4cc0e8b9b43789d155b296a58ddca"
             },
@@ -35,6 +35,78 @@ public class TrafikverketClient
 
         return trafikverketResponse.Response.Result.First().TrainMessage;
     }
+
+    public async Task<IEnumerable<TripInformation>> GetTripInformation(string bookingNumber) 
+    {
+        var request = new TrafikverketRequest 
+        {
+            Login = new Login 
+            {
+                Authenticationkey = "afa4cc0e8b9b43789d155b296a58ddca"
+            },
+            Query = new Query 
+            {
+                Objecttype = "TrainAnnouncement",
+                Schemaversion = "1.5",
+                Filter = new Filter 
+                {
+                    Eq = new Eq 
+                    {
+                        Name = "AdvertisedTrainIdent",
+                        Value = bookingNumber
+                    }
+                }
+            }
+        };
+
+        var serialized = Serialize(request);
+        var stringContent = new StringContent(serialized, Encoding.UTF8, "application/xml");
+
+        var result = await httpClient.PostAsync(baseUrl, stringContent);
+        var stringResponse = await result.Content.ReadAsStringAsync();
+
+        var trainAnnouncements = JsonConvert.DeserializeObject<TrafikverketResponse<IEnumerable<TrainAnnouncement>>>(stringResponse)
+            .Response.Result;
+
+        trainAnnouncements = trainAnnouncements.OrderBy(t => t.AdvertisedTimeAtLocation);
+
+        var firstDeparture = trainAnnouncements.First();
+
+        var viaLocations = firstDeparture.ViaToLocation.OrderBy(v => v.Order);
+
+        var middleArrivals = trainAnnouncements.Where(t => t.ActivityType == "Ankomst" && viaLocations.Any(v => v.LocationName == t.LocationSignature));
+        
+        var lastArrival = trainAnnouncements.First(t => t.LocationSignature == firstDeparture.ToLocation.First().LocationName);
+
+        var tripInformations = new List<TripInformation>();
+
+        tripInformations.Add(new TripInformation 
+        {
+            Index = 0,
+            Name = firstDeparture.LocationSignature,
+            EstimatedDepartureTime = firstDeparture.EstimatedTimeAtLocation,
+            TypeOfTraffic = firstDeparture.TypeOfTraffic
+        });
+
+        tripInformations.AddRange(middleArrivals.Select(m => new TripInformation
+        {
+            Index = viaLocations.First(v => v.LocationName == m.LocationSignature).Order + 1,
+            Name = m.LocationSignature,
+            EstimatedArrivalTime = m.EstimatedTimeAtLocation,
+            TypeOfTraffic = m.TypeOfTraffic
+        }));
+
+        tripInformations.Add(new TripInformation
+        {
+            Index = tripInformations.Count,
+            Name = lastArrival.LocationSignature,
+            EstimatedArrivalTime = lastArrival.EstimatedTimeAtLocation,
+            TypeOfTraffic = lastArrival.TypeOfTraffic
+        });
+
+        return tripInformations;
+    }
+
     private static string Serialize<T>(T dataToSerialize)
     {
         try
