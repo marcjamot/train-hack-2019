@@ -202,517 +202,517 @@ public class TrafikverketClient
                 .Response.Result.First();
         }
         
-
+        throw new Exception("test");
 
 
     }
 }
 
-string test = @"{"RESPONSE": {
-        "RESULT": [
-            {
-                "TrainAnnouncement": [
-                    {
-                        "ActivityId": "1500adde-0a5d-0422-08d7-160d69d9e84d",
-                        "ActivityType": "Ankomst",
-                        "Advertised": true,
-                        "AdvertisedTimeAtLocation": "2019-08-16T18:10:00.000+02:00",
-                        "AdvertisedTrainIdent": "2016",
-                        "Canceled": false,
-                        "EstimatedTimeIsPreliminary": false,
-                        "FromLocation": [
-                            {
-                                "LocationName": "G",
-                                "Priority": 1,
-                                "Order": 0
-                            }
-                        ],
-                        "InformationOwner": "MTRN",
-                        "LocationSignature": "Sk",
-                        "ModifiedTime": "2019-08-08T23:24:38.877Z",
-                        "NewEquipment": 0,
-                        "Operator": "MTRN",
-                        "PlannedEstimatedTimeAtLocationIsValid": false,
-                        "ProductInformation": [
-                            {
-                                "Code": "PNA070",
-                                "Description": "MTRExpress"
-                            }
-                        ],
-                        "ScheduledDepartureDateTime": "2019-08-16T00:00:00.000+02:00",
-                        "TechnicalDateTime": "2019-08-16T18:10:00.000+02:00",
-                        "TechnicalTrainIdent": "2016",
-                        "ToLocation": [
-                            {
-                                "LocationName": "Sst",
-                                "Priority": 1,
-                                "Order": 0
-                            }
-                        ],
-                        "TrackAtLocation": "1",
-                        "TrainOwner": "MTRN",
-                        "TypeOfTraffic": "Tåg",
-                        "ViaFromLocation": [
-                            {
-                                "LocationName": "A",
-                                "Priority": 2,
-                                "Order": 0
-                            },
-                            {
-                                "LocationName": "Hr",
-                                "Priority": 1,
-                                "Order": 1
-                            }
-                        ],
-                        "WebLinkName": "MTRN"
-                    },
-                    {
-                        "ActivityId": "1500adde-0a5d-0422-08d7-160d69d9e850",
-                        "ActivityType": "Ankomst",
-                        "Advertised": true,
-                        "AdvertisedTimeAtLocation": "2019-08-16T20:17:00.000+02:00",
-                        "AdvertisedTrainIdent": "2016",
-                        "Canceled": false,
-                        "EstimatedTimeIsPreliminary": false,
-                        "FromLocation": [
-                            {
-                                "LocationName": "G",
-                                "Priority": 1,
-                                "Order": 0
-                            }
-                        ],
-                        "InformationOwner": "MTRN",
-                        "LocationSignature": "Sst",
-                        "ModifiedTime": "2019-08-08T23:24:38.877Z",
-                        "NewEquipment": 0,
-                        "Operator": "MTRN",
-                        "PlannedEstimatedTimeAtLocationIsValid": false,
-                        "ProductInformation": [
-                            {
-                                "Code": "PNA070",
-                                "Description": "MTRExpress"
-                            }
-                        ],
-                        "ScheduledDepartureDateTime": "2019-08-16T00:00:00.000+02:00",
-                        "TechnicalDateTime": "2019-08-16T20:17:00.000+02:00",
-                        "TechnicalTrainIdent": "2016",
-                        "ToLocation": [
-                            {
-                                "LocationName": "Sst",
-                                "Priority": 1,
-                                "Order": 0
-                            }
-                        ],
-                        "TrackAtLocation": "4",
-                        "TrainOwner": "MTRN",
-                        "TypeOfTraffic": "Tåg",
-                        "ViaFromLocation": [
-                            {
-                                "LocationName": "A",
-                                "Priority": 3,
-                                "Order": 0
-                            },
-                            {
-                                "LocationName": "Hr",
-                                "Priority": 2,
-                                "Order": 1
-                            },
-                            {
-                                "LocationName": "Sk",
-                                "Priority": 1,
-                                "Order": 2
-                            }
-                        ],
-                        "WebLinkName": "MTRN"
-                    },
-                    {
-                        "ActivityId": "1500adde-0a5d-0422-08d7-160d69d9e849",
-                        "ActivityType": "Avgang",
-                        "Advertised": true,
-                        "AdvertisedTimeAtLocation": "2019-08-16T16:50:00.000+02:00",
-                        "AdvertisedTrainIdent": "2016",
-                        "Canceled": false,
-                        "EstimatedTimeIsPreliminary": false,
-                        "FromLocation": [
-                            {
-                                "LocationName": "G",
-                                "Priority": 1,
-                                "Order": 0
-                            }
-                        ],
-                        "InformationOwner": "MTRN",
-                        "LocationSignature": "G",
-                        "ModifiedTime": "2019-08-16T09:46:49.761Z",
-                        "NewEquipment": 0,
-                        "Operator": "MTRN",
-                        "OtherInformation": [
-                            {
-                                "Code": "ONA179",
-                                "Description": "Endast Endast MTR Express biljetter gäller."
-                            }
-                        ],
-                        "PlannedEstimatedTimeAtLocationIsValid": false,
-                        "ProductInformation": [
-                            {
-                                "Code": "PNA070",
-                                "Description": "MTRExpress"
-                            }
-                        ],
-                        "ScheduledDepartureDateTime": "2019-08-16T00:00:00.000+02:00",
-                        "TechnicalDateTime": "2019-08-16T16:50:00.000+02:00",
-                        "TechnicalTrainIdent": "2016",
-                        "ToLocation": [
-                            {
-                                "LocationName": "Sst",
-                                "Priority": 1,
-                                "Order": 0
-                            }
-                        ],
-                        "TrackAtLocation": "4",
-                        "TrainComposition": [
-                            {
-                                "Code": "TNA001",
-                                "Description": "Vagnsordning E-D-C-B-A, Café i vagn B"
-                            }
-                        ],
-                        "TrainOwner": "MTRN",
-                        "TypeOfTraffic": "Tåg",
-                        "ViaToLocation": [
-                            {
-                                "LocationName": "Hr",
-                                "Priority": 2,
-                                "Order": 0
-                            },
-                            {
-                                "LocationName": "Sk",
-                                "Priority": 1,
-                                "Order": 1
-                            },
-                            {
-                                "LocationName": "Söö",
-                                "Priority": 3,
-                                "Order": 2
-                            }
-                        ],
-                        "WebLinkName": "MTRN"
-                    },
-                    {
-                        "ActivityId": "1500adde-0a5d-0422-08d7-160d69d9e84c",
-                        "ActivityType": "Avgang",
-                        "Advertised": true,
-                        "AdvertisedTimeAtLocation": "2019-08-16T17:37:00.000+02:00",
-                        "AdvertisedTrainIdent": "2016",
-                        "Canceled": false,
-                        "EstimatedTimeIsPreliminary": false,
-                        "FromLocation": [
-                            {
-                                "LocationName": "G",
-                                "Priority": 1,
-                                "Order": 0
-                            }
-                        ],
-                        "InformationOwner": "MTRN",
-                        "LocationSignature": "Hr",
-                        "ModifiedTime": "2019-08-08T23:24:38.877Z",
-                        "NewEquipment": 0,
-                        "Operator": "MTRN",
-                        "OtherInformation": [
-                            {
-                                "Code": "ONA179",
-                                "Description": "Endast Endast MTR Express biljetter gäller."
-                            }
-                        ],
-                        "PlannedEstimatedTimeAtLocationIsValid": false,
-                        "ProductInformation": [
-                            {
-                                "Code": "PNA070",
-                                "Description": "MTRExpress"
-                            }
-                        ],
-                        "ScheduledDepartureDateTime": "2019-08-16T00:00:00.000+02:00",
-                        "TechnicalDateTime": "2019-08-16T17:39:00.000+02:00",
-                        "TechnicalTrainIdent": "2016",
-                        "ToLocation": [
-                            {
-                                "LocationName": "Sst",
-                                "Priority": 1,
-                                "Order": 0
-                            }
-                        ],
-                        "TrackAtLocation": "5",
-                        "TrainComposition": [
-                            {
-                                "Code": "TNA001",
-                                "Description": "Vagnsordning E-D-C-B-A, Café i vagn B"
-                            }
-                        ],
-                        "TrainOwner": "MTRN",
-                        "TypeOfTraffic": "Tåg",
-                        "ViaToLocation": [
-                            {
-                                "LocationName": "Sk",
-                                "Priority": 1,
-                                "Order": 0
-                            },
-                            {
-                                "LocationName": "Söö",
-                                "Priority": 2,
-                                "Order": 1
-                            }
-                        ],
-                        "WebLinkName": "MTRN"
-                    },
-                    {
-                        "ActivityId": "1500adde-0a5d-0422-08d7-160d69d9e84a",
-                        "ActivityType": "Avgang",
-                        "Advertised": true,
-                        "AdvertisedTimeAtLocation": "2019-08-16T17:22:00.000+02:00",
-                        "AdvertisedTrainIdent": "2016",
-                        "Canceled": false,
-                        "EstimatedTimeIsPreliminary": false,
-                        "FromLocation": [
-                            {
-                                "LocationName": "G",
-                                "Priority": 1,
-                                "Order": 0
-                            }
-                        ],
-                        "InformationOwner": "MTRN",
-                        "LocationSignature": "A",
-                        "ModifiedTime": "2019-08-08T23:24:38.877Z",
-                        "NewEquipment": 0,
-                        "Operator": "MTRN",
-                        "OtherInformation": [
-                            {
-                                "Code": "ONA179",
-                                "Description": "Endast Endast MTR Express biljetter gäller."
-                            },
-                            {
-                                "Code": "ONA121",
-                                "Description": "Tåget gör uppehåll vid plattformens mitt."
-                            }
-                        ],
-                        "PlannedEstimatedTimeAtLocationIsValid": false,
-                        "ProductInformation": [
-                            {
-                                "Code": "PNA070",
-                                "Description": "MTRExpress"
-                            }
-                        ],
-                        "ScheduledDepartureDateTime": "2019-08-16T00:00:00.000+02:00",
-                        "TechnicalDateTime": "2019-08-16T17:23:00.000+02:00",
-                        "TechnicalTrainIdent": "2016",
-                        "ToLocation": [
-                            {
-                                "LocationName": "Sst",
-                                "Priority": 1,
-                                "Order": 0
-                            }
-                        ],
-                        "TrackAtLocation": "1",
-                        "TrainComposition": [
-                            {
-                                "Code": "TNA001",
-                                "Description": "Vagnsordning E-D-C-B-A, Café i vagn B"
-                            }
-                        ],
-                        "TrainOwner": "MTRN",
-                        "TypeOfTraffic": "Tåg",
-                        "ViaToLocation": [
-                            {
-                                "LocationName": "Hr",
-                                "Priority": 2,
-                                "Order": 0
-                            },
-                            {
-                                "LocationName": "Sk",
-                                "Priority": 1,
-                                "Order": 1
-                            },
-                            {
-                                "LocationName": "Söö",
-                                "Priority": 3,
-                                "Order": 2
-                            }
-                        ],
-                        "WebLinkName": "MTRN"
-                    },
-                    {
-                        "ActivityId": "1500adde-0a5d-0422-08d7-160d69d9e84f",
-                        "ActivityType": "Ankomst",
-                        "Advertised": true,
-                        "AdvertisedTimeAtLocation": "2019-08-16T20:01:00.000+02:00",
-                        "AdvertisedTrainIdent": "2016",
-                        "Canceled": false,
-                        "EstimatedTimeIsPreliminary": false,
-                        "FromLocation": [
-                            {
-                                "LocationName": "G",
-                                "Priority": 1,
-                                "Order": 0
-                            }
-                        ],
-                        "InformationOwner": "MTRN",
-                        "LocationSignature": "Söö",
-                        "ModifiedTime": "2019-08-08T23:24:38.877Z",
-                        "NewEquipment": 0,
-                        "Operator": "MTRN",
-                        "PlannedEstimatedTimeAtLocationIsValid": false,
-                        "ProductInformation": [
-                            {
-                                "Code": "PNA070",
-                                "Description": "MTRExpress"
-                            }
-                        ],
-                        "ScheduledDepartureDateTime": "2019-08-16T00:00:00.000+02:00",
-                        "TechnicalDateTime": "2019-08-16T20:01:00.000+02:00",
-                        "TechnicalTrainIdent": "2016",
-                        "ToLocation": [
-                            {
-                                "LocationName": "Sst",
-                                "Priority": 1,
-                                "Order": 0
-                            }
-                        ],
-                        "TrackAtLocation": "6",
-                        "TrainOwner": "MTRN",
-                        "TypeOfTraffic": "Tåg",
-                        "ViaFromLocation": [
-                            {
-                                "LocationName": "A",
-                                "Priority": 3,
-                                "Order": 0
-                            },
-                            {
-                                "LocationName": "Hr",
-                                "Priority": 2,
-                                "Order": 1
-                            },
-                            {
-                                "LocationName": "Sk",
-                                "Priority": 1,
-                                "Order": 2
-                            }
-                        ],
-                        "WebLinkName": "MTRN"
-                    },
-                    {
-                        "ActivityId": "1500adde-0a5d-0422-08d7-160d69d9e84b",
-                        "ActivityType": "Ankomst",
-                        "Advertised": true,
-                        "AdvertisedTimeAtLocation": "2019-08-16T17:37:00.000+02:00",
-                        "AdvertisedTrainIdent": "2016",
-                        "Canceled": false,
-                        "EstimatedTimeIsPreliminary": false,
-                        "FromLocation": [
-                            {
-                                "LocationName": "G",
-                                "Priority": 1,
-                                "Order": 0
-                            }
-                        ],
-                        "InformationOwner": "MTRN",
-                        "LocationSignature": "Hr",
-                        "ModifiedTime": "2019-08-08T23:24:38.877Z",
-                        "NewEquipment": 0,
-                        "Operator": "MTRN",
-                        "PlannedEstimatedTimeAtLocationIsValid": false,
-                        "ProductInformation": [
-                            {
-                                "Code": "PNA070",
-                                "Description": "MTRExpress"
-                            }
-                        ],
-                        "ScheduledDepartureDateTime": "2019-08-16T00:00:00.000+02:00",
-                        "TechnicalDateTime": "2019-08-16T17:37:00.000+02:00",
-                        "TechnicalTrainIdent": "2016",
-                        "ToLocation": [
-                            {
-                                "LocationName": "Sst",
-                                "Priority": 1,
-                                "Order": 0
-                            }
-                        ],
-                        "TrackAtLocation": "5",
-                        "TrainOwner": "MTRN",
-                        "TypeOfTraffic": "Tåg",
-                        "ViaFromLocation": [
-                            {
-                                "LocationName": "A",
-                                "Priority": 1,
-                                "Order": 0
-                            }
-                        ],
-                        "WebLinkName": "MTRN"
-                    },
-                    {
-                        "ActivityId": "1500adde-0a5d-0422-08d7-160d69d9e84e",
-                        "ActivityType": "Avgang",
-                        "Advertised": true,
-                        "AdvertisedTimeAtLocation": "2019-08-16T18:10:00.000+02:00",
-                        "AdvertisedTrainIdent": "2016",
-                        "Canceled": false,
-                        "EstimatedTimeIsPreliminary": false,
-                        "FromLocation": [
-                            {
-                                "LocationName": "G",
-                                "Priority": 1,
-                                "Order": 0
-                            }
-                        ],
-                        "InformationOwner": "MTRN",
-                        "LocationSignature": "Sk",
-                        "ModifiedTime": "2019-08-08T23:24:38.877Z",
-                        "NewEquipment": 0,
-                        "Operator": "MTRN",
-                        "OtherInformation": [
-                            {
-                                "Code": "ONA179",
-                                "Description": "Endast Endast MTR Express biljetter gäller."
-                            }
-                        ],
-                        "PlannedEstimatedTimeAtLocationIsValid": false,
-                        "ProductInformation": [
-                            {
-                                "Code": "PNA070",
-                                "Description": "MTRExpress"
-                            }
-                        ],
-                        "ScheduledDepartureDateTime": "2019-08-16T00:00:00.000+02:00",
-                        "TechnicalDateTime": "2019-08-16T18:12:00.000+02:00",
-                        "TechnicalTrainIdent": "2016",
-                        "ToLocation": [
-                            {
-                                "LocationName": "Sst",
-                                "Priority": 1,
-                                "Order": 0
-                            }
-                        ],
-                        "TrackAtLocation": "1",
-                        "TrainComposition": [
-                            {
-                                "Code": "TNA001",
-                                "Description": "Vagnsordning E-D-C-B-A, Café i vagn B"
-                            }
-                        ],
-                        "TrainOwner": "MTRN",
-                        "TypeOfTraffic": "Tåg",
-                        "ViaToLocation": [
-                            {
-                                "LocationName": "Söö",
-                                "Priority": 1,
-                                "Order": 0
-                            }
-                        ],
-                        "WebLinkName": "MTRN"
-                    }
-                ],
-                "INFO": {
-                    "LASTMODIFIED": {
-                        "_attr_datetime": "2019-08-16T09:46:49.761Z"
-                    }
-                }
-            }
-        ]
-    }
-}"
+// string test = @"{"RESPONSE": {
+//         "RESULT": [
+//             {
+//                 "TrainAnnouncement": [
+//                     {
+//                         "ActivityId": "1500adde-0a5d-0422-08d7-160d69d9e84d",
+//                         "ActivityType": "Ankomst",
+//                         "Advertised": true,
+//                         "AdvertisedTimeAtLocation": "2019-08-16T18:10:00.000+02:00",
+//                         "AdvertisedTrainIdent": "2016",
+//                         "Canceled": false,
+//                         "EstimatedTimeIsPreliminary": false,
+//                         "FromLocation": [
+//                             {
+//                                 "LocationName": "G",
+//                                 "Priority": 1,
+//                                 "Order": 0
+//                             }
+//                         ],
+//                         "InformationOwner": "MTRN",
+//                         "LocationSignature": "Sk",
+//                         "ModifiedTime": "2019-08-08T23:24:38.877Z",
+//                         "NewEquipment": 0,
+//                         "Operator": "MTRN",
+//                         "PlannedEstimatedTimeAtLocationIsValid": false,
+//                         "ProductInformation": [
+//                             {
+//                                 "Code": "PNA070",
+//                                 "Description": "MTRExpress"
+//                             }
+//                         ],
+//                         "ScheduledDepartureDateTime": "2019-08-16T00:00:00.000+02:00",
+//                         "TechnicalDateTime": "2019-08-16T18:10:00.000+02:00",
+//                         "TechnicalTrainIdent": "2016",
+//                         "ToLocation": [
+//                             {
+//                                 "LocationName": "Sst",
+//                                 "Priority": 1,
+//                                 "Order": 0
+//                             }
+//                         ],
+//                         "TrackAtLocation": "1",
+//                         "TrainOwner": "MTRN",
+//                         "TypeOfTraffic": "Tåg",
+//                         "ViaFromLocation": [
+//                             {
+//                                 "LocationName": "A",
+//                                 "Priority": 2,
+//                                 "Order": 0
+//                             },
+//                             {
+//                                 "LocationName": "Hr",
+//                                 "Priority": 1,
+//                                 "Order": 1
+//                             }
+//                         ],
+//                         "WebLinkName": "MTRN"
+//                     },
+//                     {
+//                         "ActivityId": "1500adde-0a5d-0422-08d7-160d69d9e850",
+//                         "ActivityType": "Ankomst",
+//                         "Advertised": true,
+//                         "AdvertisedTimeAtLocation": "2019-08-16T20:17:00.000+02:00",
+//                         "AdvertisedTrainIdent": "2016",
+//                         "Canceled": false,
+//                         "EstimatedTimeIsPreliminary": false,
+//                         "FromLocation": [
+//                             {
+//                                 "LocationName": "G",
+//                                 "Priority": 1,
+//                                 "Order": 0
+//                             }
+//                         ],
+//                         "InformationOwner": "MTRN",
+//                         "LocationSignature": "Sst",
+//                         "ModifiedTime": "2019-08-08T23:24:38.877Z",
+//                         "NewEquipment": 0,
+//                         "Operator": "MTRN",
+//                         "PlannedEstimatedTimeAtLocationIsValid": false,
+//                         "ProductInformation": [
+//                             {
+//                                 "Code": "PNA070",
+//                                 "Description": "MTRExpress"
+//                             }
+//                         ],
+//                         "ScheduledDepartureDateTime": "2019-08-16T00:00:00.000+02:00",
+//                         "TechnicalDateTime": "2019-08-16T20:17:00.000+02:00",
+//                         "TechnicalTrainIdent": "2016",
+//                         "ToLocation": [
+//                             {
+//                                 "LocationName": "Sst",
+//                                 "Priority": 1,
+//                                 "Order": 0
+//                             }
+//                         ],
+//                         "TrackAtLocation": "4",
+//                         "TrainOwner": "MTRN",
+//                         "TypeOfTraffic": "Tåg",
+//                         "ViaFromLocation": [
+//                             {
+//                                 "LocationName": "A",
+//                                 "Priority": 3,
+//                                 "Order": 0
+//                             },
+//                             {
+//                                 "LocationName": "Hr",
+//                                 "Priority": 2,
+//                                 "Order": 1
+//                             },
+//                             {
+//                                 "LocationName": "Sk",
+//                                 "Priority": 1,
+//                                 "Order": 2
+//                             }
+//                         ],
+//                         "WebLinkName": "MTRN"
+//                     },
+//                     {
+//                         "ActivityId": "1500adde-0a5d-0422-08d7-160d69d9e849",
+//                         "ActivityType": "Avgang",
+//                         "Advertised": true,
+//                         "AdvertisedTimeAtLocation": "2019-08-16T16:50:00.000+02:00",
+//                         "AdvertisedTrainIdent": "2016",
+//                         "Canceled": false,
+//                         "EstimatedTimeIsPreliminary": false,
+//                         "FromLocation": [
+//                             {
+//                                 "LocationName": "G",
+//                                 "Priority": 1,
+//                                 "Order": 0
+//                             }
+//                         ],
+//                         "InformationOwner": "MTRN",
+//                         "LocationSignature": "G",
+//                         "ModifiedTime": "2019-08-16T09:46:49.761Z",
+//                         "NewEquipment": 0,
+//                         "Operator": "MTRN",
+//                         "OtherInformation": [
+//                             {
+//                                 "Code": "ONA179",
+//                                 "Description": "Endast Endast MTR Express biljetter gäller."
+//                             }
+//                         ],
+//                         "PlannedEstimatedTimeAtLocationIsValid": false,
+//                         "ProductInformation": [
+//                             {
+//                                 "Code": "PNA070",
+//                                 "Description": "MTRExpress"
+//                             }
+//                         ],
+//                         "ScheduledDepartureDateTime": "2019-08-16T00:00:00.000+02:00",
+//                         "TechnicalDateTime": "2019-08-16T16:50:00.000+02:00",
+//                         "TechnicalTrainIdent": "2016",
+//                         "ToLocation": [
+//                             {
+//                                 "LocationName": "Sst",
+//                                 "Priority": 1,
+//                                 "Order": 0
+//                             }
+//                         ],
+//                         "TrackAtLocation": "4",
+//                         "TrainComposition": [
+//                             {
+//                                 "Code": "TNA001",
+//                                 "Description": "Vagnsordning E-D-C-B-A, Café i vagn B"
+//                             }
+//                         ],
+//                         "TrainOwner": "MTRN",
+//                         "TypeOfTraffic": "Tåg",
+//                         "ViaToLocation": [
+//                             {
+//                                 "LocationName": "Hr",
+//                                 "Priority": 2,
+//                                 "Order": 0
+//                             },
+//                             {
+//                                 "LocationName": "Sk",
+//                                 "Priority": 1,
+//                                 "Order": 1
+//                             },
+//                             {
+//                                 "LocationName": "Söö",
+//                                 "Priority": 3,
+//                                 "Order": 2
+//                             }
+//                         ],
+//                         "WebLinkName": "MTRN"
+//                     },
+//                     {
+//                         "ActivityId": "1500adde-0a5d-0422-08d7-160d69d9e84c",
+//                         "ActivityType": "Avgang",
+//                         "Advertised": true,
+//                         "AdvertisedTimeAtLocation": "2019-08-16T17:37:00.000+02:00",
+//                         "AdvertisedTrainIdent": "2016",
+//                         "Canceled": false,
+//                         "EstimatedTimeIsPreliminary": false,
+//                         "FromLocation": [
+//                             {
+//                                 "LocationName": "G",
+//                                 "Priority": 1,
+//                                 "Order": 0
+//                             }
+//                         ],
+//                         "InformationOwner": "MTRN",
+//                         "LocationSignature": "Hr",
+//                         "ModifiedTime": "2019-08-08T23:24:38.877Z",
+//                         "NewEquipment": 0,
+//                         "Operator": "MTRN",
+//                         "OtherInformation": [
+//                             {
+//                                 "Code": "ONA179",
+//                                 "Description": "Endast Endast MTR Express biljetter gäller."
+//                             }
+//                         ],
+//                         "PlannedEstimatedTimeAtLocationIsValid": false,
+//                         "ProductInformation": [
+//                             {
+//                                 "Code": "PNA070",
+//                                 "Description": "MTRExpress"
+//                             }
+//                         ],
+//                         "ScheduledDepartureDateTime": "2019-08-16T00:00:00.000+02:00",
+//                         "TechnicalDateTime": "2019-08-16T17:39:00.000+02:00",
+//                         "TechnicalTrainIdent": "2016",
+//                         "ToLocation": [
+//                             {
+//                                 "LocationName": "Sst",
+//                                 "Priority": 1,
+//                                 "Order": 0
+//                             }
+//                         ],
+//                         "TrackAtLocation": "5",
+//                         "TrainComposition": [
+//                             {
+//                                 "Code": "TNA001",
+//                                 "Description": "Vagnsordning E-D-C-B-A, Café i vagn B"
+//                             }
+//                         ],
+//                         "TrainOwner": "MTRN",
+//                         "TypeOfTraffic": "Tåg",
+//                         "ViaToLocation": [
+//                             {
+//                                 "LocationName": "Sk",
+//                                 "Priority": 1,
+//                                 "Order": 0
+//                             },
+//                             {
+//                                 "LocationName": "Söö",
+//                                 "Priority": 2,
+//                                 "Order": 1
+//                             }
+//                         ],
+//                         "WebLinkName": "MTRN"
+//                     },
+//                     {
+//                         "ActivityId": "1500adde-0a5d-0422-08d7-160d69d9e84a",
+//                         "ActivityType": "Avgang",
+//                         "Advertised": true,
+//                         "AdvertisedTimeAtLocation": "2019-08-16T17:22:00.000+02:00",
+//                         "AdvertisedTrainIdent": "2016",
+//                         "Canceled": false,
+//                         "EstimatedTimeIsPreliminary": false,
+//                         "FromLocation": [
+//                             {
+//                                 "LocationName": "G",
+//                                 "Priority": 1,
+//                                 "Order": 0
+//                             }
+//                         ],
+//                         "InformationOwner": "MTRN",
+//                         "LocationSignature": "A",
+//                         "ModifiedTime": "2019-08-08T23:24:38.877Z",
+//                         "NewEquipment": 0,
+//                         "Operator": "MTRN",
+//                         "OtherInformation": [
+//                             {
+//                                 "Code": "ONA179",
+//                                 "Description": "Endast Endast MTR Express biljetter gäller."
+//                             },
+//                             {
+//                                 "Code": "ONA121",
+//                                 "Description": "Tåget gör uppehåll vid plattformens mitt."
+//                             }
+//                         ],
+//                         "PlannedEstimatedTimeAtLocationIsValid": false,
+//                         "ProductInformation": [
+//                             {
+//                                 "Code": "PNA070",
+//                                 "Description": "MTRExpress"
+//                             }
+//                         ],
+//                         "ScheduledDepartureDateTime": "2019-08-16T00:00:00.000+02:00",
+//                         "TechnicalDateTime": "2019-08-16T17:23:00.000+02:00",
+//                         "TechnicalTrainIdent": "2016",
+//                         "ToLocation": [
+//                             {
+//                                 "LocationName": "Sst",
+//                                 "Priority": 1,
+//                                 "Order": 0
+//                             }
+//                         ],
+//                         "TrackAtLocation": "1",
+//                         "TrainComposition": [
+//                             {
+//                                 "Code": "TNA001",
+//                                 "Description": "Vagnsordning E-D-C-B-A, Café i vagn B"
+//                             }
+//                         ],
+//                         "TrainOwner": "MTRN",
+//                         "TypeOfTraffic": "Tåg",
+//                         "ViaToLocation": [
+//                             {
+//                                 "LocationName": "Hr",
+//                                 "Priority": 2,
+//                                 "Order": 0
+//                             },
+//                             {
+//                                 "LocationName": "Sk",
+//                                 "Priority": 1,
+//                                 "Order": 1
+//                             },
+//                             {
+//                                 "LocationName": "Söö",
+//                                 "Priority": 3,
+//                                 "Order": 2
+//                             }
+//                         ],
+//                         "WebLinkName": "MTRN"
+//                     },
+//                     {
+//                         "ActivityId": "1500adde-0a5d-0422-08d7-160d69d9e84f",
+//                         "ActivityType": "Ankomst",
+//                         "Advertised": true,
+//                         "AdvertisedTimeAtLocation": "2019-08-16T20:01:00.000+02:00",
+//                         "AdvertisedTrainIdent": "2016",
+//                         "Canceled": false,
+//                         "EstimatedTimeIsPreliminary": false,
+//                         "FromLocation": [
+//                             {
+//                                 "LocationName": "G",
+//                                 "Priority": 1,
+//                                 "Order": 0
+//                             }
+//                         ],
+//                         "InformationOwner": "MTRN",
+//                         "LocationSignature": "Söö",
+//                         "ModifiedTime": "2019-08-08T23:24:38.877Z",
+//                         "NewEquipment": 0,
+//                         "Operator": "MTRN",
+//                         "PlannedEstimatedTimeAtLocationIsValid": false,
+//                         "ProductInformation": [
+//                             {
+//                                 "Code": "PNA070",
+//                                 "Description": "MTRExpress"
+//                             }
+//                         ],
+//                         "ScheduledDepartureDateTime": "2019-08-16T00:00:00.000+02:00",
+//                         "TechnicalDateTime": "2019-08-16T20:01:00.000+02:00",
+//                         "TechnicalTrainIdent": "2016",
+//                         "ToLocation": [
+//                             {
+//                                 "LocationName": "Sst",
+//                                 "Priority": 1,
+//                                 "Order": 0
+//                             }
+//                         ],
+//                         "TrackAtLocation": "6",
+//                         "TrainOwner": "MTRN",
+//                         "TypeOfTraffic": "Tåg",
+//                         "ViaFromLocation": [
+//                             {
+//                                 "LocationName": "A",
+//                                 "Priority": 3,
+//                                 "Order": 0
+//                             },
+//                             {
+//                                 "LocationName": "Hr",
+//                                 "Priority": 2,
+//                                 "Order": 1
+//                             },
+//                             {
+//                                 "LocationName": "Sk",
+//                                 "Priority": 1,
+//                                 "Order": 2
+//                             }
+//                         ],
+//                         "WebLinkName": "MTRN"
+//                     },
+//                     {
+//                         "ActivityId": "1500adde-0a5d-0422-08d7-160d69d9e84b",
+//                         "ActivityType": "Ankomst",
+//                         "Advertised": true,
+//                         "AdvertisedTimeAtLocation": "2019-08-16T17:37:00.000+02:00",
+//                         "AdvertisedTrainIdent": "2016",
+//                         "Canceled": false,
+//                         "EstimatedTimeIsPreliminary": false,
+//                         "FromLocation": [
+//                             {
+//                                 "LocationName": "G",
+//                                 "Priority": 1,
+//                                 "Order": 0
+//                             }
+//                         ],
+//                         "InformationOwner": "MTRN",
+//                         "LocationSignature": "Hr",
+//                         "ModifiedTime": "2019-08-08T23:24:38.877Z",
+//                         "NewEquipment": 0,
+//                         "Operator": "MTRN",
+//                         "PlannedEstimatedTimeAtLocationIsValid": false,
+//                         "ProductInformation": [
+//                             {
+//                                 "Code": "PNA070",
+//                                 "Description": "MTRExpress"
+//                             }
+//                         ],
+//                         "ScheduledDepartureDateTime": "2019-08-16T00:00:00.000+02:00",
+//                         "TechnicalDateTime": "2019-08-16T17:37:00.000+02:00",
+//                         "TechnicalTrainIdent": "2016",
+//                         "ToLocation": [
+//                             {
+//                                 "LocationName": "Sst",
+//                                 "Priority": 1,
+//                                 "Order": 0
+//                             }
+//                         ],
+//                         "TrackAtLocation": "5",
+//                         "TrainOwner": "MTRN",
+//                         "TypeOfTraffic": "Tåg",
+//                         "ViaFromLocation": [
+//                             {
+//                                 "LocationName": "A",
+//                                 "Priority": 1,
+//                                 "Order": 0
+//                             }
+//                         ],
+//                         "WebLinkName": "MTRN"
+//                     },
+//                     {
+//                         "ActivityId": "1500adde-0a5d-0422-08d7-160d69d9e84e",
+//                         "ActivityType": "Avgang",
+//                         "Advertised": true,
+//                         "AdvertisedTimeAtLocation": "2019-08-16T18:10:00.000+02:00",
+//                         "AdvertisedTrainIdent": "2016",
+//                         "Canceled": false,
+//                         "EstimatedTimeIsPreliminary": false,
+//                         "FromLocation": [
+//                             {
+//                                 "LocationName": "G",
+//                                 "Priority": 1,
+//                                 "Order": 0
+//                             }
+//                         ],
+//                         "InformationOwner": "MTRN",
+//                         "LocationSignature": "Sk",
+//                         "ModifiedTime": "2019-08-08T23:24:38.877Z",
+//                         "NewEquipment": 0,
+//                         "Operator": "MTRN",
+//                         "OtherInformation": [
+//                             {
+//                                 "Code": "ONA179",
+//                                 "Description": "Endast Endast MTR Express biljetter gäller."
+//                             }
+//                         ],
+//                         "PlannedEstimatedTimeAtLocationIsValid": false,
+//                         "ProductInformation": [
+//                             {
+//                                 "Code": "PNA070",
+//                                 "Description": "MTRExpress"
+//                             }
+//                         ],
+//                         "ScheduledDepartureDateTime": "2019-08-16T00:00:00.000+02:00",
+//                         "TechnicalDateTime": "2019-08-16T18:12:00.000+02:00",
+//                         "TechnicalTrainIdent": "2016",
+//                         "ToLocation": [
+//                             {
+//                                 "LocationName": "Sst",
+//                                 "Priority": 1,
+//                                 "Order": 0
+//                             }
+//                         ],
+//                         "TrackAtLocation": "1",
+//                         "TrainComposition": [
+//                             {
+//                                 "Code": "TNA001",
+//                                 "Description": "Vagnsordning E-D-C-B-A, Café i vagn B"
+//                             }
+//                         ],
+//                         "TrainOwner": "MTRN",
+//                         "TypeOfTraffic": "Tåg",
+//                         "ViaToLocation": [
+//                             {
+//                                 "LocationName": "Söö",
+//                                 "Priority": 1,
+//                                 "Order": 0
+//                             }
+//                         ],
+//                         "WebLinkName": "MTRN"
+//                     }
+//                 ],
+//                 "INFO": {
+//                     "LASTMODIFIED": {
+//                         "_attr_datetime": "2019-08-16T09:46:49.761Z"
+//                     }
+//                 }
+//             }
+//         ]
+//     }
+// }"

@@ -11,11 +11,9 @@ public class world_generator : MonoBehaviour
 
     List<Stop> stops = new List<Stop>();
 
-    public GameObject tile;
+    public GameObject levelRootPrefab;
 
     public int tiles = 1;
-
-    Random r = new Random();
 
     // Start is called before the first frame update
     async void Start()
@@ -53,9 +51,11 @@ public class world_generator : MonoBehaviour
 
         }
         foreach (var stop in stops) {
-            var clone = Object.Instantiate(tile, stop.Position, tile.transform.rotation);
-            clone.transform.SetParent(transform);
-            var renderer = clone.GetComponent<MeshRenderer>();
+            Debug.Log(stop.Name);
+            var levelRoot = Object.Instantiate(levelRootPrefab, stop.Position, Quaternion.identity);
+            levelRoot.transform.SetParent(transform);
+            levelRoot.name = stop.Name;
+            var renderer = levelRoot.transform.GetChild(0).GetComponent<MeshRenderer>();
             renderer.material.color = Random.ColorHSV();
         }
         
