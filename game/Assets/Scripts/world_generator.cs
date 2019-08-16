@@ -28,16 +28,17 @@ public class world_generator : MonoBehaviour
     {
         var gameState = GameObject.Find("GameProgression").GetComponent<GameState>();
 
-        var tripInformation = (await client.GetStationInformations("732"))
+        var stationInformations = (await client.GetStationInformations("188"))
+            .Where(s => s.EstimatedTime > System.DateTime.Now)
             .ToList();
 
-        for (var i = 0; i < tripInformation.Count; i++) {
+        for (var i = 0; i < stationInformations.Count; i++) {
             var stop = new Stop();
-            Debug.Log(tripInformation[i].EstimatedTime);
-            stop.name = tripInformation[i].Name;
+            Debug.Log(stationInformations[i].EstimatedTime);
+            stop.name = stationInformations[i].Name;
             stop.position = new Vector3(0, 0, i * kTileWidth);
             stops.Add(stop);
-            stop.ArrivalTime = tripInformation[i].EstimatedTime;
+            stop.ArrivalTime = stationInformations[i].EstimatedTime;
 
         }
         foreach (var stop in stops) {

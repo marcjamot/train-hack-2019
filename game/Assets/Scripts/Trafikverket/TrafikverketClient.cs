@@ -50,6 +50,11 @@ public class TrafikverketClient
                     {
                         Name = "AdvertisedTrainIdent",
                         Value = bookingNumber
+                    },
+                    Gt = new NameValue 
+                    {
+                        Name = "AdvertisedTimeAtLocation",
+                        Value = DateTime.Today.ToString("yyyy-MM-ddTHH:mm:ssZ")
                     }
                 }
             }
