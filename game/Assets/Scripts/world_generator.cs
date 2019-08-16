@@ -28,7 +28,7 @@ public class world_generator : MonoBehaviour
             stops.Add(stop);
         }
         foreach (var stop in stops) {
-            var clone = Object.Instantiate(tile, stop.position, Quaternion.identity);
+            var clone = Object.Instantiate(tile, stop.position, tile.transform.rotation);
             clone.transform.SetParent(transform);
         }
         // Right plane
