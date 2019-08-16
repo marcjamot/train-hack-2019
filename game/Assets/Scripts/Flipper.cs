@@ -9,8 +9,8 @@ public class Flipper : MonoBehaviour
     private readonly float ROTATION_EPSILON = 1f;
     private readonly float BUFFER = 3f;
     public float RotationSpeed = 10f;
-    public float StartRotation = 60;
-    public float EndRotation = 0;
+    public float StartRotation;
+    public float EndRotation;
 
     public bool IsLeft;
 
@@ -32,24 +32,25 @@ public class Flipper : MonoBehaviour
     {
         float yAngle = transform.localEulerAngles.y;
         float angle = (IsLeft ? -1 : 1) * RotationSpeed * Time.deltaTime;
-        Debug.Log(yAngle);
 
-        bool shouldRotate = (StartRotation - BUFFER) <= yAngle && yAngle <= (EndRotation + BUFFER);
+        bool shouldRotate = StartRotation <= yAngle && yAngle <= EndRotation;
+        Debug.Log($"shouldRotate:{shouldRotate} ({yAngle})");
+
+        if (!shouldRotate)
+        {
+            return;
+        }
+
         bool keyPressed = System.Math.Abs(Input.GetAxis(InputName) - 1) < EPSILON;
 
-        if (keyPressed && shouldRotate)
+        if (keyPressed)
         {
             transform.RotateAround(RotationObject.transform.position, transform.up, angle);
         }
-        else if (!keyPressed)
+        else
         {
             angle *= -1;
-            bool IsInNormalState = System.Math.Abs(yAngle - StartRotation) < ROTATION_EPSILON;
-            if (!IsInNormalState)
-            {
-                // Rotate back to original position
-                transform.RotateAround(RotationObject.transform.position, transform.up, angle);
-            }
+            transform.RotateAround(RotationObject.transform.position, transform.up, angle);
         }
 
     }
