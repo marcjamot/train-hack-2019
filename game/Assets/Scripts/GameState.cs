@@ -6,10 +6,10 @@ public class GameState : MonoBehaviour
 {
     public int LivesLeft;
     public int Score;
-    public int CurrentStationIndex;
+    public int CurrentStopIndex;
     public string NextStation;
     public System.DateTime NextArrival;
-    public ICollection<StationInformation> Stations;
+    public ICollection<Stop> Stops;
 
 
 

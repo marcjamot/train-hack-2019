@@ -9,11 +9,6 @@ public class world_generator : MonoBehaviour
 
     private TrafikverketClient client = new TrafikverketClient();
 
-    public class Stop {
-        public string name = "Stop ";
-        public System.DateTime ArrivalTime;
-        public Vector3 position;
-    }
 
     List<Stop> stops = new List<Stop>();
 
@@ -24,26 +19,41 @@ public class world_generator : MonoBehaviour
     // Start is called before the first frame update
     async void Start()
     {
-        var gameState = GameObject.Find("GameProgression").GetComponent<GameState>();
-
-        var stationInformations = (await client.GetStationInformations("188"))
+        var stationInformations = (await client.GetStationInformations("2016"))
             .Where(s => s.EstimatedTime > System.DateTime.Now)
             .ToList();
 
-        for (var i = 0; i < stationInformations.Count; i++) {
+        var numberOfStops = stationInformations.Count * 2 - 1;
+
+        for (var i = 0; i < numberOfStops; i++) {
             var stop = new Stop();
-            Debug.Log(stationInformations[i].EstimatedTime);
-            stop.name = stationInformations[i].Name;
-            stop.position = new Vector3(0, 0, i * kTileWidth);
+            var index = i / 2;
+            if(i % 2 == 0)
+            {
+                stop.PublicName = stationInformations[index].Name;
+                stop.ArrivalTime = stationInformations[index].EstimatedTime;
+                stop.Type = StopType.City;
+            } else {
+                stop.PublicName = "Forest";
+
+                stop.ArrivalTime = stationInformations[index].EstimatedTime
+                    .AddMinutes((stationInformations[index + 1].EstimatedTime - 
+                        stationInformations[index].EstimatedTime).TotalMinutes/2);
+
+                stop.Type = StopType.Forest;
+            }
+
+            stop.Name = stop.Name + i;
+            stop.Position = new Vector3(0, 0, i * kTileWidth);
+            stop.Order = i;
             stops.Add(stop);
-            stop.ArrivalTime = stationInformations[i].EstimatedTime;
 
         }
         foreach (var stop in stops) {
-            Debug.Log(stop.name);
-            var levelRoot = Object.Instantiate(levelRootPrefab, stop.position, Quaternion.identity);
+            Debug.Log(stop.Name);
+            var levelRoot = Object.Instantiate(levelRootPrefab, stop.Position, Quaternion.identity);
             levelRoot.transform.SetParent(transform);
-            levelRoot.name = stop.name;
+            levelRoot.name = stop.Name;
             var renderer = levelRoot.transform.GetChild(0).GetComponent<MeshRenderer>();
             renderer.material.color = Random.ColorHSV();
         }
@@ -63,6 +73,12 @@ public class world_generator : MonoBehaviour
         beyondPlane.transform.position = new Vector3(0, 0, 2 * kTileWidth * tiles);
         beyondPlane.transform.localScale = 2 * (tiles + 0.5f) * kPlaneScale;
         beyondPlane.transform.SetParent(transform);
+
+        var gameState = GameObject.Find("GameProgression").GetComponent<GameState>();
+        gameState.Stops = stops;
+        gameState.CurrentStopIndex = 0;
+        gameState.NextStation = stops[1].PublicName;
+        gameState.NextArrival = stops[1].ArrivalTime;
     }
 
     // Update is called once per frame
