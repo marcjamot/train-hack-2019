@@ -34,7 +34,7 @@ public class Flipper : MonoBehaviour
         float angle = (IsLeft ? -1 : 1) * RotationSpeed * Time.deltaTime;
 
         bool shouldRotate = StartRotation <= yAngle && yAngle <= EndRotation;
-        Debug.Log($"shouldRotate:{shouldRotate} ({yAngle})");
+        //Debug.Log($"shouldRotate:{shouldRotate} ({yAngle})");
 
         if (!shouldRotate)
         {
