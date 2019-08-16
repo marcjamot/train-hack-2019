@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -25,15 +26,9 @@ public class TrafikverketClient
             }
         };
 
-        var serialized = Serialize(request);
-        var stringContent = new StringContent(serialized, Encoding.UTF8, "application/xml");
+        var response = await MakeRequest<TrainMessageResponse>(request);
 
-        var result = await httpClient.PostAsync(baseUrl, stringContent);
-        var response = await result.Content.ReadAsStringAsync();
-    
-        var trafikverketResponse = JsonConvert.DeserializeObject<TrafikverketResponse<IEnumerable<TrainMessageResponse>>>(response);
-
-        return trafikverketResponse.Response.Result.First().TrainMessage;
+        return response.TrainMessage;
     }
 
     public async Task<IEnumerable<TripInformation>> GetTripInformation(string bookingNumber) 
@@ -48,9 +43,10 @@ public class TrafikverketClient
             {
                 Objecttype = "TrainAnnouncement",
                 Schemaversion = "1.5",
+                LastModified = true,
                 Filter = new Filter 
                 {
-                    Eq = new Eq 
+                    Eq = new NameValue 
                     {
                         Name = "AdvertisedTrainIdent",
                         Value = bookingNumber
@@ -59,16 +55,75 @@ public class TrafikverketClient
             }
         };
 
-        var serialized = Serialize(request);
-        var stringContent = new StringContent(serialized, Encoding.UTF8, "application/xml");
+        return await GetTripInformation(request);
+    }
 
-        var result = await httpClient.PostAsync(baseUrl, stringContent);
-        var stringResponse = await result.Content.ReadAsStringAsync();
+    public async Task<IEnumerable<TripInformation>> GetTripInformation(string bookingNumber, DateTime modifiedSince) 
+    {
+        var request = new TrafikverketRequest 
+        {
+            Login = new Login 
+            {
+                Authenticationkey = "afa4cc0e8b9b43789d155b296a58ddca"
+            },
+            Query = new Query 
+            {
+                Objecttype = "TrainAnnouncement",
+                Schemaversion = "1.5",
+                LastModified = true,
+                Filter = new Filter 
+                {
+                    Eq = new NameValue 
+                    {
+                        Name = "AdvertisedTrainIdent",
+                        Value = bookingNumber
+                    },
+                    Gt = new NameValue 
+                    {
+                        Name = "ModifiedTime",
+                        Value = modifiedSince.ToString("yyyy-MM-ddTHH:mm:ssZ")
+                    }
+                }
+            }
+        };
 
-        Debug.Log(stringResponse);
+        return await GetTripInformation(request);
+    }
 
-        var trainAnnouncements = JsonConvert.DeserializeObject<TrafikverketResponse<IEnumerable<TrainAnnouncementResponse>>>(stringResponse)
-            .Response.Result.First().TrainAnnouncement;
+    public async Task<IEnumerable<TrainStation>> GetTrainStations(params string[] locationSignatures)
+    {
+        var request = new TrafikverketRequest 
+        {
+            Login = new Login 
+            {
+                Authenticationkey = "afa4cc0e8b9b43789d155b296a58ddca"
+            },
+            Query = new Query 
+            {
+                Objecttype = "TrainStation",
+                Schemaversion = "1",
+                Filter = new Filter 
+                {
+                    In = new NameValue 
+                    {
+                        Name = "LocationSignature",
+                        Value = string.Join(", ", locationSignatures)
+                    }
+                }
+            }
+        };
+
+        return (await MakeRequest<TrainStationResponse>(request)).TrainStation;
+    }
+
+    private async Task<IEnumerable<TripInformation>> GetTripInformation(TrafikverketRequest request) 
+    {
+        var trainAnnouncements = (await MakeRequest<TrainAnnouncementResponse>(request)).TrainAnnouncement;
+
+        if(!trainAnnouncements.Any()) 
+        {
+            return new List<TripInformation>();
+        }
 
         trainAnnouncements = trainAnnouncements.OrderBy(t => t.AdvertisedTimeAtLocation);
 
@@ -82,28 +137,36 @@ public class TrafikverketClient
 
         var tripInformations = new List<TripInformation>();
 
+        Debug.Log("GetTrainStations");
+        var trainStations = await GetTrainStations(trainAnnouncements.Select(t => t.LocationSignature).Distinct().ToArray());
+
+        Debug.Log(string.Join(", ", trainStations.Select(t => t.AdvertisedLocationName)));
         tripInformations.Add(new TripInformation 
         {
             Index = 0,
-            Name = firstDeparture.LocationSignature,
+            Name = trainStations.First(t => t.LocationSignature == firstDeparture.LocationSignature).AdvertisedLocationName,
             EstimatedDepartureTime = firstDeparture.AdvertisedTimeAtLocation,
-            TypeOfTraffic = firstDeparture.TypeOfTraffic
+            TypeOfTraffic = firstDeparture.TypeOfTraffic,
+            ModifiedTime = firstDeparture.ModifiedTime
+
         });
 
         tripInformations.AddRange(middleArrivals.Select(m => new TripInformation
         {
             Index = viaLocations.First(v => v.LocationName == m.LocationSignature).Order + 1,
-            Name = m.LocationSignature,
+            Name = trainStations.First(t => t.LocationSignature == m.LocationSignature).AdvertisedLocationName,
             EstimatedArrivalTime = m.AdvertisedTimeAtLocation,
-            TypeOfTraffic = m.TypeOfTraffic
+            TypeOfTraffic = m.TypeOfTraffic,
+            ModifiedTime = m.ModifiedTime
         }));
 
         tripInformations.Add(new TripInformation
         {
             Index = tripInformations.Count,
-            Name = lastArrival.LocationSignature,
+            Name = trainStations.First(t => t.LocationSignature == lastArrival.LocationSignature).AdvertisedLocationName,
             EstimatedArrivalTime = lastArrival.AdvertisedTimeAtLocation,
-            TypeOfTraffic = lastArrival.TypeOfTraffic
+            TypeOfTraffic = lastArrival.TypeOfTraffic,
+            ModifiedTime = lastArrival.ModifiedTime
         });
 
         return tripInformations;
@@ -111,17 +174,25 @@ public class TrafikverketClient
 
     private static string Serialize<T>(T dataToSerialize)
     {
-        try
-        {
-            var stringwriter = new System.IO.StringWriter();
-            var serializer = new XmlSerializer(typeof(T));
-            serializer.Serialize(stringwriter, dataToSerialize);
-            return stringwriter.ToString();
-        }
-        catch
-        {
-            throw;
-        }
+        var stringwriter = new System.IO.StringWriter();
+        var serializer = new XmlSerializer(typeof(T));
+        serializer.Serialize(stringwriter, dataToSerialize);
+        return stringwriter.ToString();
+    }
+
+    private async Task<T> MakeRequest<T>(TrafikverketRequest request)
+    {
+        var serialized = Serialize(request);
+        Debug.Log(serialized);
+        var stringContent = new StringContent(serialized, Encoding.UTF8, "application/xml");
+
+        var result = await httpClient.PostAsync(baseUrl, stringContent);
+        var stringResponse = await result.Content.ReadAsStringAsync();
+
+        Debug.Log(stringResponse);
+
+        return JsonConvert.DeserializeObject<TrafikverketResponse<IEnumerable<T>>>(stringResponse)
+            .Response.Result.First();
     }
 }
 

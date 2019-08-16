@@ -7,4 +7,5 @@ public class TripInformation
     public DateTime? EstimatedArrivalTime { get; set; }
     public DateTime? EstimatedDepartureTime { get; set; }
     public string TypeOfTraffic { get; set; }
+    public DateTime ModifiedTime { get; set; }
 }

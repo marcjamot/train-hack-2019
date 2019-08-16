@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,8 +11,9 @@ public class TrafikverketText : MonoBehaviour
     async void Start()
     {
         var instruction = GetComponent<Text>();
-        var tripInformations = await client.GetTripInformation("10420");
+        // var tripInformations = await client.GetTripInformation("10420");
 
+        var tripInformations = await client.GetTripInformation("10420", DateTime.Parse("2019-08-16T18:23:04.654Z"));
         var message = JsonConvert.SerializeObject(tripInformations);
 
 

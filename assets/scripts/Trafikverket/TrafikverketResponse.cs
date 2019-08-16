@@ -15,3 +15,7 @@ public class TrainAnnouncementResponse {
 public class TrainMessageResponse {
     public IEnumerable<TrainMessage> TrainMessage { get; set; }
 }
+
+public class TrainStationResponse {
+    public IEnumerable<TrainStation> TrainStation { get; set; }
+}
