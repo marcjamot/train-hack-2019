@@ -18,8 +18,6 @@ public class world_generator : MonoBehaviour
     // Start is called before the first frame update
     async void Start()
     {
-        var gameState = GameObject.Find("GameProgression").GetComponent<GameState>();
-
         var stationInformations = (await client.GetStationInformations("2016"))
             .Where(s => s.EstimatedTime > System.DateTime.Now)
             .ToList();
@@ -42,7 +40,7 @@ public class world_generator : MonoBehaviour
                     .AddMinutes((stationInformations[index + 1].EstimatedTime - 
                         stationInformations[index].EstimatedTime).TotalMinutes/2);
 
-                stop.Type = StopType.City;
+                stop.Type = StopType.Forest;
             }
             
             stop.Name = stop.Name + i;
@@ -75,6 +73,12 @@ public class world_generator : MonoBehaviour
         beyondPlane.transform.position = new Vector3(0, 0, 2 * kTileWidth * tiles);
         beyondPlane.transform.localScale = 2 * (tiles + 0.5f) * kPlaneScale;
         beyondPlane.transform.SetParent(transform);
+
+        var gameState = GameObject.Find("GameProgression").GetComponent<GameState>();
+        gameState.Stops = stops;
+        gameState.CurrentStopIndex = 0;
+        gameState.NextStation = stops[1].PublicName;
+        gameState.NextArrival = stops[1].ArrivalTime;
     }
 
     // Update is called once per frame
