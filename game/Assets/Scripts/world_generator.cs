@@ -18,6 +18,8 @@ public class world_generator : MonoBehaviour
 
     public int tiles = 1;
 
+    Random r = new Random();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +32,8 @@ public class world_generator : MonoBehaviour
         foreach (var stop in stops) {
             var clone = Object.Instantiate(tile, stop.position, tile.transform.rotation);
             clone.transform.SetParent(transform);
+            var renderer = clone.GetComponent<MeshRenderer>();
+            renderer.material.color = Random.ColorHSV();
         }
         // Right plane
         var rightPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
