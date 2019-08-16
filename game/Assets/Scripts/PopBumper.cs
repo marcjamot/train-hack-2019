@@ -15,14 +15,16 @@ public class PopBumper : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ball"))
-        {
-            Rigidbody ball = collision.gameObject.GetComponent<Rigidbody>();
-            Vector3 forceVector = (ball.position - PopBumberLocation).normalized * PushBackForce;
+        Debug.Log("COLLIDE!!");
+        //if (collision.gameObject.CompareTag("Ball"))
+        //{
+        Debug.Log("HIT!");
+        Rigidbody ball = collision.gameObject.GetComponent<Rigidbody>();
+        Vector3 forceVector = (ball.position - PopBumberLocation).normalized * PushBackForce;
 
-            ball.AddForce(forceVector);
-            // HitSound.Play();
-        }
+        ball.AddForce(forceVector);
+        // HitSound.Play();
+        //}
     }
 
 }
