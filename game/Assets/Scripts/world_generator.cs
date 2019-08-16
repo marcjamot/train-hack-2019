@@ -9,12 +9,6 @@ public class world_generator : MonoBehaviour
 
     private TrafikverketClient client = new TrafikverketClient();
 
-    public class Stop {
-        public string name = "stop ";
-        public System.DateTime ArrivalTime;
-        public Vector3 position;
-    }
-
     List<Stop> stops = new List<Stop>();
 
     public GameObject tile;
@@ -28,22 +22,38 @@ public class world_generator : MonoBehaviour
     {
         var gameState = GameObject.Find("GameProgression").GetComponent<GameState>();
 
-        var stationInformations = (await client.GetStationInformations("188"))
+        var stationInformations = (await client.GetStationInformations("2016"))
             .Where(s => s.EstimatedTime > System.DateTime.Now)
             .ToList();
 
-        for (var i = 0; i < stationInformations.Count; i++) {
+        var numberOfStops = stationInformations.Count * 2 - 1;
+
+        for (var i = 0; i < numberOfStops; i++) {
+            
             var stop = new Stop();
-            Debug.Log(stationInformations[i].EstimatedTime);
-            stop.name = stationInformations[i].Name;
-            stop.position = new Vector3(0, 0, i * kTileWidth);
+                var index = i / 2;
+            if(i % 2 == 0)
+            {
+                stop.Name = stationInformations[index].Name;
+                stop.ArrivalTime = stationInformations[index].EstimatedTime;
+                stop.Type = StopType.City;
+            } else {
+                stop.Name = "forest " + i / 2 ;
+                
+                stop.ArrivalTime = stationInformations[index].EstimatedTime
+                    .AddMinutes((stationInformations[index + 1].EstimatedTime - 
+                        stationInformations[index].EstimatedTime).TotalMinutes/2);
+
+                stop.Type = StopType.City;
+            }
+            
+            stop.Position = new Vector3(0, 0, i * kTileWidth);
+            stop.Order = i;
             stops.Add(stop);
-            stop.ArrivalTime = stationInformations[i].EstimatedTime;
 
         }
         foreach (var stop in stops) {
-            Debug.Log(stop.name);
-            var clone = Object.Instantiate(tile, stop.position, tile.transform.rotation);
+            var clone = Object.Instantiate(tile, stop.Position, tile.transform.rotation);
             clone.transform.SetParent(transform);
             var renderer = clone.GetComponent<MeshRenderer>();
             renderer.material.color = Random.ColorHSV();

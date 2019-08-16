@@ -28,11 +28,11 @@ public class CameraHop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var progress = speed * Time.fixedTime;
-        level = Mathf.FloorToInt(progress / kMaxTime);
-        var (position, angle) = Next(progress % kMaxTime);
-        transform.position = position + 2 * Vector3.forward * level;
-        transform.GetChild(0).localEulerAngles = new Vector3(kCameraOffset + angle, 0, 0);
+        // var progress = speed * Time.fixedTime;
+        // level = Mathf.FloorToInt(progress / kMaxTime);
+        // var (position, angle) = Next(progress % kMaxTime);
+        // transform.position = position + 2 * Vector3.forward * level;
+        // transform.GetChild(0).localEulerAngles = new Vector3(kCameraOffset + angle, 0, 0);
     }
 
     public (Vector3, float) Next(float t) {
