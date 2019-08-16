@@ -31,7 +31,7 @@ public class TrafikverketClient
         return response.TrainMessage;
     }
 
-    public async Task<IEnumerable<TripInformation>> GetTripInformation(string bookingNumber) 
+    public async Task<IEnumerable<StationInformation>> GetStationInformations(string bookingNumber) 
     {
         var request = new TrafikverketRequest 
         {
@@ -58,7 +58,7 @@ public class TrafikverketClient
         return await GetTripInformation(request);
     }
 
-    public async Task<IEnumerable<TripInformation>> GetTripInformation(string bookingNumber, DateTime modifiedSince) 
+    public async Task<IEnumerable<StationInformation>> GetTripInformation(string bookingNumber, DateTime modifiedSince) 
     {
         var request = new TrafikverketRequest 
         {
@@ -116,13 +116,13 @@ public class TrafikverketClient
         return (await MakeRequest<TrainStationResponse>(request)).TrainStation;
     }
 
-    private async Task<IEnumerable<TripInformation>> GetTripInformation(TrafikverketRequest request) 
+    private async Task<IEnumerable<StationInformation>> GetTripInformation(TrafikverketRequest request) 
     {
         var trainAnnouncements = (await MakeRequest<TrainAnnouncementResponse>(request)).TrainAnnouncement;
 
         if(!trainAnnouncements.Any()) 
         {
-            return new List<TripInformation>();
+            return new List<StationInformation>();
         }
 
         trainAnnouncements = trainAnnouncements.OrderBy(t => t.AdvertisedTimeAtLocation);
@@ -135,36 +135,34 @@ public class TrafikverketClient
         
         var lastArrival = trainAnnouncements.First(t => t.LocationSignature == firstDeparture.ToLocation.First().LocationName);
 
-        var tripInformations = new List<TripInformation>();
+        var tripInformations = new List<StationInformation>();
 
-        Debug.Log("GetTrainStations");
         var trainStations = await GetTrainStations(trainAnnouncements.Select(t => t.LocationSignature).Distinct().ToArray());
 
-        Debug.Log(string.Join(", ", trainStations.Select(t => t.AdvertisedLocationName)));
-        tripInformations.Add(new TripInformation 
+        tripInformations.Add(new StationInformation 
         {
             Index = 0,
             Name = trainStations.First(t => t.LocationSignature == firstDeparture.LocationSignature).AdvertisedLocationName,
-            EstimatedDepartureTime = firstDeparture.AdvertisedTimeAtLocation,
+            EstimatedTime = firstDeparture.AdvertisedTimeAtLocation,
             TypeOfTraffic = firstDeparture.TypeOfTraffic,
             ModifiedTime = firstDeparture.ModifiedTime
 
         });
 
-        tripInformations.AddRange(middleArrivals.Select(m => new TripInformation
+        tripInformations.AddRange(middleArrivals.Select(m => new StationInformation
         {
             Index = viaLocations.First(v => v.LocationName == m.LocationSignature).Order + 1,
             Name = trainStations.First(t => t.LocationSignature == m.LocationSignature).AdvertisedLocationName,
-            EstimatedArrivalTime = m.AdvertisedTimeAtLocation,
+            EstimatedTime = m.AdvertisedTimeAtLocation,
             TypeOfTraffic = m.TypeOfTraffic,
             ModifiedTime = m.ModifiedTime
         }));
 
-        tripInformations.Add(new TripInformation
+        tripInformations.Add(new StationInformation
         {
             Index = tripInformations.Count,
             Name = trainStations.First(t => t.LocationSignature == lastArrival.LocationSignature).AdvertisedLocationName,
-            EstimatedArrivalTime = lastArrival.AdvertisedTimeAtLocation,
+            EstimatedTime = lastArrival.AdvertisedTimeAtLocation,
             TypeOfTraffic = lastArrival.TypeOfTraffic,
             ModifiedTime = lastArrival.ModifiedTime
         });
