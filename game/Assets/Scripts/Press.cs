@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class press : MonoBehaviour
+public class Press : MonoBehaviour
 {
     
     
@@ -29,7 +29,7 @@ public class press : MonoBehaviour
         }
         var angle = Mathf.Lerp(rest, rest + reach, _current_amount);
         var euler = transform.localEulerAngles;
-        Debug.Log(euler.y);
-        // transform.localEulerAngles = new Vector3(euler.x, angle, euler.z);
+        // Debug.Log(euler.y);
+        transform.localEulerAngles = new Vector3(euler.x, angle, euler.z);
     }
 }
