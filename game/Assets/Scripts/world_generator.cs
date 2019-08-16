@@ -32,11 +32,11 @@ public class world_generator : MonoBehaviour
                 var index = i / 2;
             if(i % 2 == 0)
             {
-                stop.Name = stationInformations[index].Name;
+                stop.PublicName = stationInformations[index].Name;
                 stop.ArrivalTime = stationInformations[index].EstimatedTime;
                 stop.Type = StopType.City;
             } else {
-                stop.Name = "forest " + i / 2 ;
+                stop.PublicName = "Forest";
                 
                 stop.ArrivalTime = stationInformations[index].EstimatedTime
                     .AddMinutes((stationInformations[index + 1].EstimatedTime - 
@@ -45,6 +45,7 @@ public class world_generator : MonoBehaviour
                 stop.Type = StopType.City;
             }
             
+            stop.Name = stop.Name + i;
             stop.Position = new Vector3(0, 0, i * kTileWidth);
             stop.Order = i;
             stops.Add(stop);
