@@ -10,18 +10,16 @@ public class world_generator : MonoBehaviour
     private TrafikverketClient client = new TrafikverketClient();
 
     public class Stop {
-        public string name = "stop ";
+        public string name = "Stop ";
         public System.DateTime ArrivalTime;
         public Vector3 position;
     }
 
     List<Stop> stops = new List<Stop>();
 
-    public GameObject tile;
+    public GameObject levelRootPrefab;
 
     public int tiles = 1;
-
-    Random r = new Random();
 
     // Start is called before the first frame update
     async void Start()
@@ -43,9 +41,10 @@ public class world_generator : MonoBehaviour
         }
         foreach (var stop in stops) {
             Debug.Log(stop.name);
-            var clone = Object.Instantiate(tile, stop.position, tile.transform.rotation);
-            clone.transform.SetParent(transform);
-            var renderer = clone.GetComponent<MeshRenderer>();
+            var levelRoot = Object.Instantiate(levelRootPrefab, stop.position, Quaternion.identity);
+            levelRoot.transform.SetParent(transform);
+            levelRoot.name = stop.name;
+            var renderer = levelRoot.transform.GetChild(0).GetComponent<MeshRenderer>();
             renderer.material.color = Random.ColorHSV();
         }
         
