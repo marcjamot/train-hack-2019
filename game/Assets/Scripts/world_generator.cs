@@ -16,7 +16,8 @@ public class world_generator : MonoBehaviour
     public GameObject levelRootPrefab;
     public GameObject ballPreset;
 
-    public int tiles = 1;
+    public Color cityColor = Color.gray;
+    public Color forrestColor = Color.green;
 
     // Start is called before the first frame update
     async void Start()
@@ -50,6 +51,7 @@ public class world_generator : MonoBehaviour
             stops.Add(stop);
 
         }
+
         foreach (var stop in stops) {
             Debug.Log(stop.Name);
             var levelRoot = Object.Instantiate(levelRootPrefab, stop.Position, Quaternion.identity);
@@ -59,24 +61,27 @@ public class world_generator : MonoBehaviour
             levelInformation.IsActive = stop.Order == 0;
             levelInformation.Order = stop.Order;
             var renderer = levelRoot.transform.Find("BaseModel").GetComponent<MeshRenderer>();
-            renderer.material.color = Random.ColorHSV();
+            renderer.material.color = stop.Type == StopType.City ? cityColor : forrestColor;;
         }
         
         // Right plane
         var rightPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-        rightPlane.transform.position = new Vector3(kTileWidth * (tiles + 1) / 2, 0, kTileWidth * (tiles - 1f) / 2);
-        rightPlane.transform.localScale = tiles * kPlaneScale;
+        rightPlane.transform.position = new Vector3(kTileWidth * (numberOfStops + 1) / 2, 0, kTileWidth * (numberOfStops - 1f) / 2);
+        rightPlane.transform.localScale = numberOfStops * kPlaneScale;
         rightPlane.transform.SetParent(transform);
+        rightPlane.GetComponent<MeshRenderer>().material.color = forrestColor;
         // Left plane
         var leftPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-        leftPlane.transform.position = new Vector3(kTileWidth * (-tiles - 1) / 2, 0, kTileWidth * (tiles - 1f) / 2);
-        leftPlane.transform.localScale = tiles * kPlaneScale;
+        leftPlane.transform.position = new Vector3(kTileWidth * (-numberOfStops - 1) / 2, 0, kTileWidth * (numberOfStops - 1f) / 2);
+        leftPlane.transform.localScale = numberOfStops * kPlaneScale;
         leftPlane.transform.SetParent(transform);
+        leftPlane.GetComponent<MeshRenderer>().material.color = forrestColor;
         // ...and beyond
         var beyondPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-        beyondPlane.transform.position = new Vector3(0, 0, 2 * kTileWidth * tiles);
-        beyondPlane.transform.localScale = 2 * (tiles + 0.5f) * kPlaneScale;
+        beyondPlane.transform.position = new Vector3(0, 0, 2 * kTileWidth * numberOfStops);
+        beyondPlane.transform.localScale = 2 * (numberOfStops + 0.5f) * kPlaneScale;
         beyondPlane.transform.SetParent(transform);
+        beyondPlane.GetComponent<MeshRenderer>().material.color = forrestColor;
 
         var mahBallz = Object.Instantiate(ballPreset, kBallStartPosition, Quaternion.identity);
     }
