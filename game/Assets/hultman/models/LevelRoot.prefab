@@ -226,6 +226,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7916646894849097214}
+  - component: {fileID: -7509743068411943551}
   m_Layer: 0
   m_Name: LevelRoot
   m_TagString: Untagged
@@ -254,6 +255,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7509743068411943551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3018532028256294486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2520e95f93ae4573b86408e258198ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsActive: 0
+  Order: 0
 --- !u!1 &3663083980546797385
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,6 +643,11 @@ PrefabInstance:
     - target: {fileID: 1241861202211911095, guid: ebc43df30872e4e16b14c91728e84282,
         type: 3}
       propertyPath: m_Name
+      value: BaseModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 1241861202211911095, guid: ebc43df30872e4e16b14c91728e84282,
+        type: 3}
+      propertyPath: m_TagString
       value: BaseModel
       objectReference: {fileID: 0}
     - target: {fileID: 7858590925330971636, guid: ebc43df30872e4e16b14c91728e84282,
