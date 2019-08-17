@@ -60,6 +60,11 @@ public class world_generator : MonoBehaviour
             var levelInformation = levelRoot.transform.GetComponent<LevelInformation>();
             levelInformation.IsActive = stop.Order == 0;
             levelInformation.Order = stop.Order;
+            var stationName = levelRoot.transform.Find("StationName");
+            stationName.gameObject.SetActive(stop.Type == StopType.City);
+            if (stop.Type == StopType.City) {  
+              stationName.GetComponent<TextMesh>().text = stop.PublicName;
+            }
             var renderer = levelRoot.transform.Find("BaseModel").GetComponent<MeshRenderer>();
             renderer.material.color = stop.Type == StopType.City ? cityColor : forrestColor;;
         }
