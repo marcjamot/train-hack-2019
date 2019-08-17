@@ -47,7 +47,8 @@ public class Plunger : MonoBehaviour
 
         if (Input.GetKey(KeyCode.R) && ballCache != null)
         {
-            ballCache.transform.position = new Vector3(0, -0.089688f, -0.95f);
+          var level2 = GameObject.Find("GameProgression").GetComponent<CameraHop>().level2;
+            ballCache.transform.position = new Vector3(0, -0.089688f, -0.95f) + 2 * Vector3.forward * level2;
             ballCache.GetComponent<Rigidbody>().velocity = Vector3.zero;
             ballCache.SetActive(true);
         }
