@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraHop : MonoBehaviour
 {
-    public int level = 0;
+    public int level2 = 0;
 
     IList<(float, Vector3, float)> targets = new List<(float, Vector3, float)> {
         (0f, Vector3.zero, 0),
@@ -13,14 +14,22 @@ public class CameraHop : MonoBehaviour
         (0.75f, new Vector3(0, 0.30f, 1.5f), -15),
         (1f, 2 * Vector3.forward, 0),
     };
-    const float kMaxTime = 1.5f;
+ShouldGoToNextLevel backref;
+  internal void startMeAgain(ShouldGoToNextLevel shouldGoToNextLevel)
+  {
+    backref = shouldGoToNextLevel;
+  }
+
+  const float kMaxTime = 1.5f;
 
     const float kCameraOffset = 45f;
 
     public float speed = 1f;
+  public bool _transitioning;
+  private float _transitionStart;
 
-    // Start is called before the first frame update
-    void Start()
+  // Start is called before the first frame update
+  void Start()
     {
         
     }
@@ -28,14 +37,26 @@ public class CameraHop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var progress = speed * Time.fixedTime;
-        level = Mathf.FloorToInt(progress / kMaxTime);
-        var (position, angle) = Next(progress % kMaxTime);
-        transform.position = position + 2 * Vector3.forward * level;
+        var progress = _transitioning ? (Time.time - _transitionStart) : 0;
+        if (progress >= kMaxTime) {
+          ++level2;
+          _transitioning = false;
+          progress = 0;
+      backref.StartBallAgainPleease();
+        }
+        Debug.Log("PROGRESS " + progress);
+        var (position, angle) = Next(progress);
+        transform.position = position + 2 * Vector3.forward * level2;
         transform.localEulerAngles = new Vector3(angle, 0, 0);
     }
 
-    public (Vector3, float) Next(float t) {
+  internal void Hop()
+  {
+    _transitioning = true;
+    _transitionStart = Time.time;
+  }
+
+  public (Vector3, float) Next(float t) {
         var prevTarget = targets[0];
         foreach (var target in targets) {
             var (time, position, angle) = target;

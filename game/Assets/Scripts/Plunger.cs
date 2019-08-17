@@ -48,6 +48,7 @@ public class Plunger : MonoBehaviour
         {
             ballCache.transform.position = new Vector3(0, -0.089688f, -0.95f);
             ballCache.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            ballCache.SetActive(true);
         }
     }
 
