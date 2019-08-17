@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7060269129006519259}
   - component: {fileID: 7060269129006519258}
   m_Layer: 0
-  m_Name: PlungerTrigger
+  m_Name: StartPlungerTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,6 +57,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 432895948722d45c9b6bb249c4fbf827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxPower: 200
-  PowerDelta: 150
+  MaxPower: 55
+  PowerDelta: 3
   FirstLaunchKey: 32
