@@ -58,7 +58,7 @@ public class world_generator : MonoBehaviour
             var levelInformation = levelRoot.transform.GetComponent<LevelInformation>();
             levelInformation.IsActive = stop.Order == 0;
             levelInformation.Order = stop.Order;
-            var renderer = transform.Find("BaseModel").GetComponent<MeshRenderer>();
+            var renderer = levelRoot.transform.Find("BaseModel").GetComponent<MeshRenderer>();
             renderer.material.color = Random.ColorHSV();
         }
         
