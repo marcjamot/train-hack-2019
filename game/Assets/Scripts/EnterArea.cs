@@ -15,19 +15,19 @@ public class EnterArea : MonoBehaviour
     void Start()
     {
         gameState = GameObject.Find("GameProgression").GetComponent<GameState>();
-        
+
         Debug.Log(gameState);
         levelInformation = transform.parent.GetComponent<LevelInformation>();
 
         string[] levelSoundNames = Directory.GetFiles(".");
-        Debug.Log($"Sounds: {levelSoundNames}");
+        Debug.Log($"Sounds: {string.Join(", ", levelSoundNames)}");
         //Resources.Load<AudioSource>("Sound/")
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(levelInformation.IsActive) 
+        if (levelInformation.IsActive)
         {
             isActive = false;
         }
@@ -35,8 +35,8 @@ public class EnterArea : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(!isActive) return;
-        
+        if (!isActive) return;
+
         if (other.gameObject.CompareTag("Ball"))
         {
             gameState.CurrentStopIndex++;
