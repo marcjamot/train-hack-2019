@@ -14,6 +14,8 @@ public class LevelBlocker : MonoBehaviour
     private void Start()
     {
         levelInformation = transform.parent.GetComponent<LevelInformation>();
+        Vector3 pos = transform.position;
+        transform.position = new Vector3(pos.x, StartPosition, pos.z);
     }
 
     void Update()
