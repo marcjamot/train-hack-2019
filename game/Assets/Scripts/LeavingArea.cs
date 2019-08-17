@@ -11,7 +11,7 @@ public class LeavingArea : MonoBehaviour
     void Start()
     {
         gameState = GameObject.Find("GameProgression").GetComponent<GameState>();
-        levelInformation = GameObject.Find("Stop").GetComponent<LevelInformation>();
+        levelInformation = transform.parent.GetComponent<LevelInformation>();
     }
 
     // Update is called once per frame

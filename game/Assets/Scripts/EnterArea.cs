@@ -7,6 +7,7 @@ public class EnterArea : MonoBehaviour
 {
     private GameState gameState;
     private LevelInformation levelInformation;
+    private bool isActive;
 
     private Dictionary<int, AudioSource> levelSound;
 
@@ -14,7 +15,9 @@ public class EnterArea : MonoBehaviour
     void Start()
     {
         gameState = GameObject.Find("GameProgression").GetComponent<GameState>();
-        levelInformation = GameObject.Find("Stop").GetComponent<LevelInformation>();
+        
+        Debug.Log(gameState);
+        levelInformation = transform.parent.GetComponent<LevelInformation>();
 
         string[] levelSoundNames = Directory.GetFiles(".");
         Debug.Log($"Sounds: {levelSoundNames}");
@@ -24,14 +27,20 @@ public class EnterArea : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(levelInformation.IsActive) 
+        {
+            isActive = false;
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
+        if(!isActive) return;
+        
         if (other.gameObject.CompareTag("Ball"))
         {
             gameState.CurrentStopIndex++;
-            if (gameState.CurrentStopIndex != gameState.Stops.Count)
+            if (gameState.CurrentStopIndex != gameState.Stops?.Count)
             {
                 gameState.NextArrival = gameState.Stops[gameState.CurrentStopIndex + 1].ArrivalTime;
                 gameState.NextStation = gameState.Stops[gameState.CurrentStopIndex + 1].Name;
