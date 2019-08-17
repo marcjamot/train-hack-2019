@@ -8,9 +8,9 @@ public class CameraHop : MonoBehaviour
 
     IList<(float, Vector3, float)> targets = new List<(float, Vector3, float)> {
         (0f, Vector3.zero, 0),
-        (0.20f, new Vector3(0, 0.25f, 0.4f), -20),
-        (0.50f, new Vector3(0, 0.35f, 0.7f), -20),
-        (0.75f, new Vector3(0, 0.2f, 1.5f), -15),
+        (0.20f, new Vector3(0, 0.35f, 0.4f), -20),
+        (0.50f, new Vector3(0, 0.55f, 0.7f), -20),
+        (0.75f, new Vector3(0, 0.30f, 1.5f), -15),
         (1f, 2 * Vector3.forward, 0),
     };
     const float kMaxTime = 1.5f;
@@ -32,7 +32,7 @@ public class CameraHop : MonoBehaviour
         level = Mathf.FloorToInt(progress / kMaxTime);
         var (position, angle) = Next(progress % kMaxTime);
         transform.position = position + 2 * Vector3.forward * level;
-        transform.GetChild(0).localEulerAngles = new Vector3(kCameraOffset + angle, 0, 0);
+        transform.localEulerAngles = new Vector3(angle, 0, 0);
     }
 
     public (Vector3, float) Next(float t) {
