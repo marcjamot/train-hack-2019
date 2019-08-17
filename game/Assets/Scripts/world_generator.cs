@@ -43,7 +43,6 @@ public class world_generator : MonoBehaviour
                 stop.Type = StopType.Forest;
             }
 
-            stop.Name = stop.Name + i;
             stop.Position = new Vector3(0, 0, i * kTileWidth);
             stop.Order = i;
             stops.Add(stop);
@@ -56,6 +55,9 @@ public class world_generator : MonoBehaviour
             levelRoot.name = stop.Name;
             var renderer = levelRoot.transform.GetChild(0).GetComponent<MeshRenderer>();
             renderer.material.color = Random.ColorHSV();
+            var levelInformation = levelRoot.transform.GetChild(0).GetComponent<LevelInformation>();
+            levelInformation.IsActive = stop.Order == 0;
+            levelInformation.Order = stop.Order;
         }
         
         // Right plane

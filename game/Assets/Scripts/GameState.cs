@@ -9,7 +9,7 @@ public class GameState : MonoBehaviour
     public int CurrentStopIndex;
     public string NextStation;
     public System.DateTime NextArrival;
-    public ICollection<Stop> Stops;
+    public IList<Stop> Stops;
 
 
 
