@@ -9,13 +9,25 @@ public class LevelBlocker : MonoBehaviour
     public float MoveForce;
     public float TriggerTime;
     private bool CanMoveDown = true;
+    LevelInformation levelInformation;
+
+    private void Start()
+    {
+        levelInformation = transform.parent.GetComponent<LevelInformation>();
+    }
 
     void Update()
     {
+        if (!levelInformation.isActiveAndEnabled)
+        {
+            return;
+        }
+
         if (CanMoveDown && transform.position.y > BottomPosition)
         {
             transform.position += Vector3.down * MoveForce * Time.deltaTime;
             CanMoveDown = transform.position.y > BottomPosition;
+
         }
 
         if (!CanMoveDown)
