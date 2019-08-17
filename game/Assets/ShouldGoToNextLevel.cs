@@ -19,8 +19,6 @@ public class ShouldGoToNextLevel : MonoBehaviour
   void Start()
     {
 cameraHop = GameObject.Find("GameProgression").GetComponent<CameraHop>();
-cameraHop.startMeAgain(this);
-        
     }
 
     // Update is called once per frame
@@ -37,14 +35,16 @@ cameraHop.startMeAgain(this);
 
       if (other.gameObject.CompareTag("Ball"))
       {
+
           ball = other.gameObject.GetComponent<Rigidbody>();
-          Debug.Log("SHOULD GO TO NEXT LEVEL");
+          Debug.Log("SHOULD GO TO NEXT LEVEL", ball);
           _pausedVelocity = ball.velocity;
           _pausedAngularVelocity = ball.angularVelocity;
  ball.isKinematic = true;
 
           
           cameraHop.Hop();
+          cameraHop.startMeAgain(this);
 
       }
     }
@@ -59,7 +59,11 @@ cameraHop.startMeAgain(this);
 
   internal void StartBallAgainPleease()
   {
-    ball.isKinematic = true;
+    if (ball == null) {
+      return;
+    }
+    Debug.Log("nu kör vi igen");
+    ball.isKinematic = false;
     ball.velocity = _pausedVelocity;
     ball.angularVelocity = _pausedAngularVelocity;
   }

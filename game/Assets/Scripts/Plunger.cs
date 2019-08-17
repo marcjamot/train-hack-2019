@@ -35,8 +35,9 @@ public class Plunger : MonoBehaviour
                 Debug.Log("LETTING GO");
                 foreach (Rigidbody ball in BallList)
                 {
-                    ball.AddForce(Power * Vector3.forward);// (Quaternion.AngleAxis(angle, Vector3.up) * Vector3.forward));
-                }
+                    // ball.AddForce(Power * Vector3.forward);// (Quaternion.AngleAxis(angle, Vector3.up) * Vector3.forward));
+          ball.AddForce(Power * (Quaternion.AngleAxis(angle, Vector3.up) * Vector3.forward));
+        }
             }
         }
         else

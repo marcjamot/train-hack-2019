@@ -44,7 +44,7 @@ ShouldGoToNextLevel backref;
           progress = 0;
       backref.StartBallAgainPleease();
         }
-        Debug.Log("PROGRESS " + progress);
+        // Debug.Log("PROGRESS " + progress);
         var (position, angle) = Next(progress);
         transform.position = position + 2 * Vector3.forward * level2;
         transform.localEulerAngles = new Vector3(angle, 0, 0);
