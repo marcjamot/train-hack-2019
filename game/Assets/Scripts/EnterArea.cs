@@ -16,7 +16,7 @@ public class EnterArea : MonoBehaviour
         gameState = GameObject.Find("GameProgression").GetComponent<GameState>();
         levelInformation = GameObject.Find("Stop").GetComponent<LevelInformation>();
 
-        string[] levelSoundNames = Directory.GetFiles("Sound");
+        string[] levelSoundNames = Directory.GetFiles(".");
         Debug.Log($"Sounds: {levelSoundNames}");
         //Resources.Load<AudioSource>("Sound/")
     }
