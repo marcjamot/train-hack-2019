@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class EnterArea : MonoBehaviour
@@ -7,12 +8,17 @@ public class EnterArea : MonoBehaviour
     private GameState gameState;
     private LevelInformation levelInformation;
 
+    private Dictionary<int, AudioSource> levelSound;
+
     // Start is called before the first frame update
     void Start()
     {
         gameState = GameObject.Find("GameProgression").GetComponent<GameState>();
         levelInformation = GameObject.Find("Stop").GetComponent<LevelInformation>();
 
+        string[] levelSoundNames = Directory.GetFiles("Sound");
+        Debug.Log($"Sounds: {levelSoundNames}");
+        //Resources.Load<AudioSource>("Sound/")
     }
 
     // Update is called once per frame
@@ -20,12 +26,13 @@ public class EnterArea : MonoBehaviour
     {
     }
 
-    void OnTriggerEnter(Collision other) 
+    void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Ball")) 
+        if (other.gameObject.CompareTag("Ball"))
         {
             gameState.CurrentStopIndex++;
-            if(gameState.CurrentStopIndex != gameState.Stops.Count) {
+            if (gameState.CurrentStopIndex != gameState.Stops.Count)
+            {
                 gameState.NextArrival = gameState.Stops[gameState.CurrentStopIndex + 1].ArrivalTime;
                 gameState.NextStation = gameState.Stops[gameState.CurrentStopIndex + 1].Name;
             }
@@ -33,7 +40,7 @@ public class EnterArea : MonoBehaviour
             levelInformation.IsActive = true;
 
             gameObject.SetActive(false);
-            
+
         }
     }
 }

@@ -35,7 +35,7 @@ public class Plunger : MonoBehaviour
                 Debug.Log("LETTING GO");
                 foreach (Rigidbody ball in BallList)
                 {
-                    ball.AddForce(Power * (Quaternion.AngleAxis(angle, Vector3.up) * Vector3.forward));
+                    ball.AddForce(Power * Vector3.forward);// (Quaternion.AngleAxis(angle, Vector3.up) * Vector3.forward));
                 }
             }
         }
@@ -44,7 +44,8 @@ public class Plunger : MonoBehaviour
             Power = 0;
         }
 
-        if (Input.GetKey(KeyCode.R) && ballCache != null) {
+        if (Input.GetKey(KeyCode.R) && ballCache != null)
+        {
             ballCache.transform.position = new Vector3(0, -0.089688f, -0.95f);
             ballCache.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
