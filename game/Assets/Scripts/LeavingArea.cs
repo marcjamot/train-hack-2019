@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LeavingArea : MonoBehaviour
 {
-    
+
     private GameState gameState;
     private LevelInformation levelInformation;
     // Start is called before the first frame update
@@ -17,22 +17,23 @@ public class LeavingArea : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(levelInformation.IsActive) 
+        if (levelInformation.IsActive)
         {
             gameObject.SetActive(true);
-        } else 
+        }
+        else
         {
             gameObject.SetActive(false);
         }
     }
 
-    void OnTriggerEnter(Collision other) 
+    void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Ball")) 
+        if (other.gameObject.CompareTag("Ball"))
         {
             other.gameObject.SetActive(false);
             gameState.LivesLeft--;
-            if(gameState.LivesLeft == 0)
+            if (gameState.LivesLeft == 0)
             {
                 //You Lose;
             }
