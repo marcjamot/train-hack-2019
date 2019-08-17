@@ -6,6 +6,7 @@ public class world_generator : MonoBehaviour
 {
     const float kTileWidth = 2f;
     Vector3 kPlaneScale = Vector3.one * 0.2f;
+    Vector3 kBallStartPosition = new Vector3(0, -0.089688f, -0.95f);
 
     private TrafikverketClient client = new TrafikverketClient();
 
@@ -13,6 +14,7 @@ public class world_generator : MonoBehaviour
     List<Stop> stops = new List<Stop>();
 
     public GameObject levelRootPrefab;
+    public GameObject ballPreset;
 
     public int tiles = 1;
 
@@ -74,11 +76,7 @@ public class world_generator : MonoBehaviour
         beyondPlane.transform.localScale = 2 * (tiles + 0.5f) * kPlaneScale;
         beyondPlane.transform.SetParent(transform);
 
-        var gameState = GameObject.Find("GameProgression").GetComponent<GameState>();
-        gameState.Stops = stops;
-        gameState.CurrentStopIndex = 0;
-        gameState.NextStation = stops[1].PublicName;
-        gameState.NextArrival = stops[1].ArrivalTime;
+        var mahBallz = Object.Instantiate(ballPreset, kBallStartPosition, Quaternion.identity);
     }
 
     // Update is called once per frame
